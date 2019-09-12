@@ -1,13 +1,19 @@
 Bootstrap: docker
-From: tensorflow/tensorflow:1.12.0-devel-gpu-py3
+From: ubuntu:14.04
+
+%labels
+MAINTAINER vanessasaur
+WHATAMI dinosaur
+
+%environment
+DINOSAUR=vanessasaurus
+export DINOSAUR
+
+%files
+rawr.sh /rawr.sh
 
 %post
-# default mount paths, files
-mkdir /scratch /data /secure /seq
-  
-# install other packages you want
-pip install --upgrade pip
-pip install --no-cache-dir seaborn
-pip install --no-cache-dir Pillow
-pip install --no-cache-dir keras
-pip install --no-cache-dir sklearn
+chmod u+x /rawr.sh
+
+%runscript
+exec /bin/bash /rawr.sh
